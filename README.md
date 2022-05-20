@@ -5,5 +5,6 @@
 2. You can change the status of the book and move it from shelf to shelf
 3. You can search for a specific book on the search page and add it to a specific shelf
 ### How does this app work
-# install npm 
-## npm start
+#### install npm 
+1. run the development server:
+2. npm start
