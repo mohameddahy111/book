@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import Books from '../components/Books';
 import BooksAPI from '../BooksAPI';
 
@@ -25,12 +24,12 @@ const Search = ({}) => {
       return b;
     });
     setBooks(newShelf);
-    BooksAPI.update(book, move)
+    BooksAPI.update(book, move);
   };
   useEffect(() => {
     let isActive = true;
     if (query) {
-      BooksAPI.search(query).then(data => {
+      BooksAPI.search(query , 1).then(data => {
         if (data.err) {
           setSearch([]);
         } else {
@@ -61,21 +60,38 @@ const Search = ({}) => {
             />
           </div>
         </div>
-        {search.length >0 ?(
-        <div className='search-books-results'>
-          <ol className='books-grid'>
-            {search.map(x => (
-              <li key={x.id}>
-                <Books book={x} updatehandler={update} />
-              </li>
-            ))}
-          </ol>
-        </div>):(null)}
+        {search.length > 0 ? (
+          <div className='search-books-results'>
+            <ol className='books-grid'>
+              {search.map(x => (
+                <li key={x.id}>
+                  <Books book={x} updatehandler={update} />
+                </li>
+              ))}
+            </ol>
+          </div>
+        ) : (
+          <div>
+            {query ? (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                }}
+              >
+                <span style={{ color: 'red', fontSize: '30px' }}>
+                  "{`${query}`}"{' '}
+                </span>
+                <h1>No result of your search</h1>
+              </div>
+            ) : null}
+          </div>
+        )}
       </div>
     </div>
   );
 };
-
-Search.propTypes = {};
 
 export default Search;
