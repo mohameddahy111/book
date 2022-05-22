@@ -29,7 +29,7 @@ const Search = ({}) => {
   useEffect(() => {
     let isActive = true;
     if (query) {
-      BooksAPI.search(query , 1).then(data => {
+      BooksAPI.search(query).then(data => {
         if (data.err) {
           setSearch([]);
         } else {
@@ -44,6 +44,7 @@ const Search = ({}) => {
       setSearch([]);
     };
   }, [query]);
+  
   return (
     <div>
       <div className='search-books'>

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const books = ({ book , updatehandler}) => {
+const books = ({ book, updatehandler }) => {
+  
   return (
     <div>
       <div className='book'>
@@ -11,9 +12,11 @@ const books = ({ book , updatehandler}) => {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
             }}
-          ></div>
+            
+          >
+            <img src={book.imageLinks ?.thumbnail} width={128} height={193}  />
+          </div>
           <div className='book-shelf-changer'>
             <select
               defaultValue={book.shelf ? book.shelf :'none'}
@@ -37,8 +40,8 @@ const books = ({ book , updatehandler}) => {
 };
 
 books.propTypes = {
-  book :PropTypes.string.isRequired,
-  updatehandler :PropTypes.func.isRequired,
+  book: PropTypes.object.isRequired,
+  updatehandler: PropTypes.func.isRequired,
 };
 
 export default books;

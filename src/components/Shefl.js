@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Books from '../components/Books';
+import Books from './Books';
 
 const Shefl = ({ title, data, shelf, updatehandler }) => {
   const newbook = data.filter(data => data.shelf === shelf);

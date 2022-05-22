@@ -2,17 +2,16 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Search from './pages/Search';
 import Home from './pages/Home';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import BooksAPI from './BooksAPI';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import { getAll, update } from './BooksAPI';
 
 function App() {
   const [books, setBooks] = useState([]);
+  
   useEffect(() => {
-    BooksAPI.getAll().then(res => {
-      setBooks(res);
-    });
+    getAll().then(res => setBooks(res));
   }, []);
-  const update = (book, move) => {
+  const updatehandler = (book, move) => {
     const newShelf = books.map(b => {
       if (b.id === book.id) {
         book.shelf = move;
@@ -21,21 +20,18 @@ function App() {
       return b;
     });
     setBooks(newShelf);
-    BooksAPI.update(book, move);
+    update(book, move);
   };
-
+  
   return (
     <div className='app'>
-      <BrowserRouter>
+      <BrowserRouter> 
         <Routes>
           <Route
             path='/'
-            element={<Home data={books} updatehandler={update} />}
+            element={<Home data={books} updatehandler={updatehandler} />}
           />
-          <Route
-            path='/search'
-            element={<Search updatehandler={update} data={books} />}
-          />
+          <Route path='/search' element={<Search />} />
         </Routes>
       </BrowserRouter>
     </div>
