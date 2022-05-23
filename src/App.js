@@ -31,7 +31,7 @@ function App() {
             path='/'
             element={<Home data={books} updatehandler={updatehandler} />}
           />
-          <Route path='/search' element={<Search />} />
+          <Route path='/search' element={<Search data={books} updatehandler={updatehandler} />} />
         </Routes>
       </BrowserRouter>
     </div>

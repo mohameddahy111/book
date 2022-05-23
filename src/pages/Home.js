@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Shefl from '../components/Shefl';
 import { useNavigate } from 'react-router-dom';
 
 const Home = ({ data, updatehandler }) => {
-  const [books, setBooks] = useState([]);
   const navgate = useNavigate();
 
   return (
@@ -12,19 +10,19 @@ const Home = ({ data, updatehandler }) => {
       <div>
         <Shefl
           title={'Currently Reading'}
-          data={books && data}
+          data={ data}
           updatehandler={updatehandler}
           shelf={'currentlyReading'}
         />
         <Shefl
           shelf={'wantToRead'}
-          data={books && data}
+          data={ data}
           updatehandler={updatehandler}
           title={'want To Read'}
         />
         <Shefl
           shelf={'read'}
-          data={books && data}
+          data={ data}
           updatehandler={updatehandler}
           title={'Read'}
         />

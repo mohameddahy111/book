@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const books = ({ book, updatehandler }) => {
-  
+const books = ({ book, updatehandler, search }) => {
+  const shelf = book.shelf|| search?.find(x => x.id === book.id)?.shelf;
+
   return (
     <div>
       <div className='book'>
@@ -13,13 +14,12 @@ const books = ({ book, updatehandler }) => {
               width: 128,
               height: 193,
             }}
-            
           >
-            <img src={book.imageLinks ?.thumbnail} width={128} height={193}  />
+            <img src={book.imageLinks?.thumbnail} width={128} height={193} />
           </div>
           <div className='book-shelf-changer'>
             <select
-              defaultValue={book.shelf ? book.shelf :'none'}
+              defaultValue={shelf ? shelf:'none'}
               onChange={e => updatehandler(book, e.target.value)}
             >
               <option value='none' disabled>

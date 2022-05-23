@@ -2,30 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Books from '../components/Books';
 import BooksAPI from '../BooksAPI';
 
-const Search = ({}) => {
-  const [books, setBooks] = useState([]);
+const Search = ({updatehandler , data}) => {
   const [search, setSearch] = useState([]);
   const [query, setQuery] = useState('');
 
-  const data = () => {
-    BooksAPI.getAll().then(res => {
-      setBooks(res);
-    });
-  };
-  useEffect(() => {
-    data();
-  }, []);
-  const update = (book, move) => {
-    const newShelf = books.map(b => {
-      if (b.id === book.id) {
-        book.shelf = move;
-        return book;
-      }
-      return b;
-    });
-    setBooks(newShelf);
-    BooksAPI.update(book, move);
-  };
   useEffect(() => {
     let isActive = true;
     if (query) {
@@ -44,6 +24,7 @@ const Search = ({}) => {
       setSearch([]);
     };
   }, [query]);
+
   
   return (
     <div>
@@ -66,7 +47,7 @@ const Search = ({}) => {
             <ol className='books-grid'>
               {search.map(x => (
                 <li key={x.id}>
-                  <Books book={x} updatehandler={update} />
+                  <Books book={x} updatehandler={updatehandler} search={data} />
                 </li>
               ))}
             </ol>
